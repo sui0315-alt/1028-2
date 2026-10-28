@@ -9,6 +9,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onOpenExport }) => {
   const navLinks = [
+    { id: 'flowchart', label: '人員協同流程圖' },
     { id: 'matrix', label: '角色價值矩陣' },
     { id: 'network', label: '協同網絡圖' },
     { id: 'causes', label: '5M1E 根因排查' },

@@ -10,6 +10,7 @@ import { WorkflowTracker } from './components/WorkflowTracker';
 import { MoldingDiagnostics } from './components/MoldingDiagnostics';
 import { RoleDetailModal } from './components/RoleDetailModal';
 import { ExportModal } from './components/ExportModal';
+import { HumanProcessFlowchart } from './components/HumanProcessFlowchart';
 
 export default function App() {
   const [scenario, setScenario] = useState<ScenarioType>(() => {
@@ -29,7 +30,7 @@ export default function App() {
     return SCENARIO_ROLES[scenario];
   });
 
-  const [activeTab, setActiveTab] = useState<string>('matrix');
+  const [activeTab, setActiveTab] = useState<string>('flowchart');
   const [selectedRole, setSelectedRole] = useState<RoleValueItem | null>(null);
   const [isExportOpen, setIsExportOpen] = useState<boolean>(false);
 
@@ -81,13 +82,14 @@ export default function App() {
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Navigation Tabs Bar for Large Screen Context */}
         <div className="mb-6 flex items-center justify-between border-b border-slate-200 pb-3">
-          <div className="flex items-center gap-1 sm:gap-2">
+          <div className="flex items-center gap-1 sm:gap-2 overflow-x-auto pb-1 no-scrollbar">
             {[
-              { id: 'matrix', label: '1. 角色價值分析矩陣' },
-              { id: 'network', label: '2. 跨角色協同網絡圖' },
-              { id: 'causes', label: '3. 5M1E 黏模根因排查' },
-              { id: 'workflow', label: '4. 8D 工作流推進' },
-              { id: 'diagnostic', label: '5. 現場成型自我診斷' }
+              { id: 'flowchart', label: '1. 人員協同流程圖 (位置標示)' },
+              { id: 'matrix', label: '2. 角色價值分析矩陣' },
+              { id: 'network', label: '3. 跨角色協同網絡圖' },
+              { id: 'causes', label: '4. 5M1E 黏模根因排查' },
+              { id: 'workflow', label: '5. 8D 工作流推進' },
+              { id: 'diagnostic', label: '6. 現場成型自我診斷' }
             ].map((tab) => {
               const active = activeTab === tab.id;
               return (
@@ -112,6 +114,14 @@ export default function App() {
         </div>
 
         {/* Dynamic Tab Panes */}
+        {activeTab === 'flowchart' && (
+          <HumanProcessFlowchart
+            roles={roles}
+            scenario={scenario}
+            onSelectRole={(r) => setSelectedRole(r)}
+          />
+        )}
+
         {activeTab === 'matrix' && (
           <RoleMatrixView
             roles={roles}
