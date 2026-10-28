@@ -1,0 +1,6 @@
+{
+  "name": "塑膠原料黏模客訴－6位角色價值分析系統",
+  "description": "塑膠原料射出成型黏模客訴之跨角色價值分析表、5M1E 根因協同排查與 8D 工作流系統",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
